@@ -9,6 +9,6 @@ public class CrearcionUsuarios extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crearcion_usuarios);
+        setContentView(R.layout.crearcion_usuarios);
     }
 }
