@@ -27,27 +27,27 @@
         android:layout_width="214dp"
         android:layout_height="110dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/txtUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/icono_app" />
 
     <EditText
-        android:id="@+id/txtUsuario"
+        android:id="@+id/txtUser"
         android:layout_width="226dp"
         android:layout_height="45dp"
         android:layout_marginBottom="48dp"
         android:ems="10"
         android:hint="Usuario"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtPassword"
+        app:layout_constraintBottom_toTopOf="@+id/txtClave"
         app:layout_constraintEnd_toEndOf="@+id/btnCrearCuenta"
-        app:layout_constraintStart_toStartOf="@+id/txtPassword"
+        app:layout_constraintStart_toStartOf="@+id/txtClave"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
-        android:id="@+id/txtPassword"
+        android:id="@+id/txtClave"
         android:layout_width="226dp"
         android:layout_height="50dp"
         android:layout_marginBottom="29dp"
@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnIngresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUser" />
 
     <Button
         android:id="@+id/btnIngresar"
@@ -69,7 +69,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnCrearCuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/txtClave" />
 
     <Button
         android:id="@+id/btnCrearCuenta"
