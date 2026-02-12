@@ -27,14 +27,14 @@
         android:layout_width="214dp"
         android:layout_height="110dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtUser"
+        app:layout_constraintBottom_toTopOf="@+id/txtUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/icono_app" />
 
     <EditText
-        android:id="@+id/txtUser"
+        android:id="@+id/txtUsuario"
         android:layout_width="226dp"
         android:layout_height="45dp"
         android:layout_marginBottom="48dp"
@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnIngresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUser" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUsuario" />
 
     <Button
         android:id="@+id/btnIngresar"
