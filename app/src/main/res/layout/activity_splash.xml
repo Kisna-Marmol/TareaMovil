@@ -15,11 +15,10 @@
         android:layout_height="120dp"
         android:layout_marginTop="80dp"
         android:contentDescription="Logo de la aplicación"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/icono_app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icono_app" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Nombre de la app -->
     <TextView

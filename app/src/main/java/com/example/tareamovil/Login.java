@@ -70,7 +70,8 @@ public class Login extends AppCompatActivity {
                         //navegarPral();
                         Log.e("LOGIN EXITOSO",usuario);
                         Dialog.toast(Login.this,"Exito");
-                        llamarPral();
+                        //PASAR EL NOMBRE DE USUARIO A LA PANTALLA DE BIENVENIDA
+                        llamarPral(username);
                     }
                     else
                     {
@@ -98,9 +99,10 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    private void llamarPral()
+    private void llamarPral(String nombreUsuario)
     {
         Intent intent = new Intent(Login.this, Bienvenido.class);
+        intent.putExtra("Nombre_Usuario", nombreUsuario);
         startActivity(intent);
         finish(); // Elimina el splash del stack para que no se regrese a él
     }
