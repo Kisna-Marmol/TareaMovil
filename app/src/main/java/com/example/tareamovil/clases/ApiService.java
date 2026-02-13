@@ -141,7 +141,7 @@ public class ApiService {
         void onSuccess(String usuario);
         void onError(String error);
     }
-    public static void guardarUsuario(String dni, String nombre, String apellido, String email, String usuario, String clave, boolean activo, ApiCallback callback)
+    public static void guardarUsuario(String dni, String nombre, String apellido, String email, String usuario, String clave, String telefono, boolean activo, ApiCallback callback)
     {
         JSONObject json = new JSONObject();
         try {
@@ -151,6 +151,7 @@ public class ApiService {
             json.put("correoe", email);
             json.put("usuario", usuario);
             json.put("clave", clave);
+            json.put("telefono", telefono);
             json.put("estado", activo ? "ACTIVO" : "INACTIVO"); // En PHP: 1=activo, 0=inactivo
         } catch (Exception e) {
             callback.onError("Error al preparar datos del usuario");

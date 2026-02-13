@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 public class CrearcionUsuarios extends AppCompatActivity {
 
-    private EditText txtDNI, txtNombre, txtApellido, txtCorreo, txtUser, txtClave;
+    private EditText txtDNI, txtNombre, txtApellido, txtCorreo, txtUser, txtClave, txtTelefono;
     private Button btnCrear;
 
     @SuppressLint("MissingInflatedId")
@@ -33,6 +33,7 @@ public class CrearcionUsuarios extends AppCompatActivity {
         txtNombre = findViewById(R.id.txtNombre);
         txtApellido = findViewById(R.id.txtApellido);
         txtCorreo = findViewById(R.id.txtCorreo);
+        txtTelefono = findViewById(R.id.txtTelefono);
         txtUser = findViewById(R.id.txtNewUser);
         txtClave = findViewById(R.id.txtNewClave);
 
@@ -48,9 +49,10 @@ public class CrearcionUsuarios extends AppCompatActivity {
                 txtApellido.getText().toString().trim().equals("")||
                 txtNombre.getText().toString().trim().equals("")||
                 txtCorreo.getText().toString().trim().equals("") ||
+                txtTelefono.getText().toString().trim().equals("") ||
                 txtDNI.getText().toString().trim().equals(""))
         {
-            Dialog.toast(CrearcionUsuarios.this,"Debe de INgresar todos los Campos");
+            Dialog.toast(CrearcionUsuarios.this,"Debe de Ingresar todos los Campos");
         }
         else
         {
@@ -64,10 +66,11 @@ public class CrearcionUsuarios extends AppCompatActivity {
         String apellido = txtApellido.getText().toString();
         String nombre = txtNombre.getText().toString();
         String correo = txtCorreo.getText().toString();
+        String telefono = txtTelefono.getText().toString();
         String dni = txtDNI.getText().toString().trim();//etDni.getText().toString().trim();
         boolean estado=true;
 
-        ApiService.guardarUsuario(dni, nombre, apellido, correo, usuario, pass, estado, new ApiService.ApiCallback()
+        ApiService.guardarUsuario(dni, nombre, apellido, correo, usuario, pass, telefono, estado, new ApiService.ApiCallback()
                 {
                     @Override
                     public void onSuccess(String response)
