@@ -187,6 +187,7 @@
 
             <!-- ACTIVAR USUARIO -->
             <LinearLayout
+                android:id="@+id/filaActivarUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="4dp"
@@ -195,22 +196,25 @@
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="ACTIVAR USUARIO"
                     android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <Switch
                     android:id="@+id/swActivarUsuario"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <!-- DESACTIVAR USUARIO -->
             <LinearLayout
+                android:id="@+id/filaDesactivarUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="4dp"
@@ -219,22 +223,25 @@
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="DESACTIVAR USUARIO"
                     android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <Switch
                     android:id="@+id/swDesactivarUsuario"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <!-- MODULO PRODUCTO -->
             <LinearLayout
+                android:id="@+id/filaModuloProducto"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="4dp"
@@ -243,22 +250,25 @@
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="MODULO PRODUCTO"
                     android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <Switch
                     android:id="@+id/swModuloProducto"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <!-- CREAR PRODUCTO -->
             <LinearLayout
+                android:id="@+id/filaCrearProducto"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="4dp"
@@ -267,22 +277,25 @@
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="CREAR PRODUCTO"
                     android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <Switch
                     android:id="@+id/swCrearProducto"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <!-- MODIFICAR PRODUCTO -->
             <LinearLayout
+                android:id="@+id/filaModificarProducto"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="4dp"
@@ -291,18 +304,20 @@
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="MODIFICAR PRODUCTO"
                     android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <Switch
                     android:id="@+id/swModificarProducto"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </LinearLayout>

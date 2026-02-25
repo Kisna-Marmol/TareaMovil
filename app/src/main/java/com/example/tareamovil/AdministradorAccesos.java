@@ -13,39 +13,6 @@ public class AdministradorAccesos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrador_accesos);
-    }
-
-    private void configurarSwitch(Switch sw, LinearLayout fila) {
-        // Color inicial según estado
-        if (sw.isChecked()) {
-            fila.setBackgroundColor(Color.parseColor("#00C853")); // verde
-        } else {
-            fila.setBackgroundColor(Color.parseColor("#F44336")); // rojo
-        }
-
-        // Cambiar color al toglear
-        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                fila.setBackgroundColor(Color.parseColor("#00C853")); // verde
-            } else {
-                fila.setBackgroundColor(Color.parseColor("#F44336")); // rojo
-            }
-        });
-    }
-
-    // Declarar switches y filas
-    Switch swReiniciarSesion, swRestringirIntentos, swModuloUsuario,
-            swCrearUsuario, swModificarUsuario, swActivarUsuario,
-            swDesactivarUsuario, swModuloProducto, swCrearProducto, swModificarProducto;
-
-    LinearLayout filaReiniciar, filaRestringir, filaModuloUsuario,
-            filaCrearUsuario, filaModificarUsuario, filaActivarUsuario,
-            filaDesactivarUsuario, filaModuloProducto, filaCrearProducto, filaModificarProducto;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrador_accesos);
 
         // Enlazar switches
         swReiniciarSesion    = findViewById(R.id.swReiniciarSesion);
@@ -83,4 +50,32 @@ public class AdministradorAccesos extends AppCompatActivity {
         configurarSwitch(swCrearProducto,      filaCrearProducto);
         configurarSwitch(swModificarProducto,  filaModificarProducto);
     }
+
+    private void configurarSwitch(Switch sw, LinearLayout fila) {
+        // Color inicial según estado
+        if (sw.isChecked()) {
+            fila.setBackgroundColor(Color.parseColor("#00C853")); // verde
+        } else {
+            fila.setBackgroundColor(Color.parseColor("#F44336")); // rojo
+        }
+
+        // Cambiar color al toglear
+        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                fila.setBackgroundColor(Color.parseColor("#00C853")); // verde
+            } else {
+                fila.setBackgroundColor(Color.parseColor("#F44336")); // rojo
+            }
+        });
+    }
+
+    // Declarar switches y filas
+    Switch swReiniciarSesion, swRestringirIntentos, swModuloUsuario,
+            swCrearUsuario, swModificarUsuario, swActivarUsuario,
+            swDesactivarUsuario, swModuloProducto, swCrearProducto, swModificarProducto;
+
+    LinearLayout filaReiniciar, filaRestringir, filaModuloUsuario,
+            filaCrearUsuario, filaModificarUsuario, filaActivarUsuario,
+            filaDesactivarUsuario, filaModuloProducto, filaCrearProducto, filaModificarProducto;
+
 }

@@ -6,22 +6,39 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.tareamovil.clases.ApiService;
+import com.example.tareamovil.clases.Config;
 import com.example.tareamovil.clases.Dialog;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CrearcionUsuarios extends AppCompatActivity {
 
     private EditText txtDNI, txtNombre, txtApellido, txtCorreo, txtUser, txtClave, txtTelefono;
     private Button btnCrear;
+    private Spinner spEstado;
+
+    private ListView listViewUsuarios;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -36,10 +53,74 @@ public class CrearcionUsuarios extends AppCompatActivity {
         txtTelefono = findViewById(R.id.txtTelefono);
         txtUser = findViewById(R.id.txtNewUser);
         txtClave = findViewById(R.id.txtNewClave);
+        spEstado = findViewById(R.id.spEstado);
+
+        String[] estados = {"ACTIVO", "INACTIVO"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                estados
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spEstado.setAdapter(adapter);
 
         btnCrear = findViewById(R.id.btnCrearUsuario);
 
         btnCrear.setOnClickListener(View -> validarCampos());
+
+        listViewUsuarios = findViewById(R.id.listViewUsuarios);
+        cargarUsuarios();
+
+    }
+
+    public void cargarUsuarios(){
+        String URL = Config.local + "listar_usuario.php";
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                response -> {
+                    List<String[]> listaUsuarios = new ArrayList<>();
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject obj = response.getJSONObject(i);
+                            String nombre   = obj.getString("user_nombre");
+                            String apellido = obj.getString("user_apellido");
+                            String usuario  = obj.getString("user_usuario");
+                            listaUsuarios.add(new String[]{nombre + " " + apellido, usuario});
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    actualizarListView(listaUsuarios);
+                },
+                error -> Toast.makeText(this, "Error al cargar usuarios", Toast.LENGTH_SHORT).show()
+        );
+
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void actualizarListView(List<String[]> listaUsuarios) {
+        ArrayAdapter<String[]> adapterLista = new ArrayAdapter<String[]>(
+                this, R.layout.item_usuario, listaUsuarios) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(getContext())
+                            .inflate(R.layout.item_usuario, parent, false);
+                }
+                String[] item = getItem(position);
+                TextView nombre  = convertView.findViewById(R.id.txtItemNombreCompleto);
+                TextView usuario = convertView.findViewById(R.id.txtItemUsuario);
+                nombre.setText(item[0]);
+                usuario.setText(item[1]);
+                return convertView;
+            }
+        };
+        listViewUsuarios.setAdapter(adapterLista);
     }
 
     private void validarCampos()

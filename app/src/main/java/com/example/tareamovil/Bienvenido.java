@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Bienvenido extends AppCompatActivity {
-    Button btnsalir, btnAccesos;
+    Button btnsalir, btnAccesos, btnUsuario;
     TextView tblTitulo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class Bienvenido extends AppCompatActivity {
         setContentView(R.layout.bienvenido);
         btnsalir = findViewById(R.id.btnCerrarSesion);
         btnAccesos = findViewById(R.id.btnModuloAcceso);
+        btnUsuario = findViewById(R.id.btnModuloUsuario);
         tblTitulo = findViewById(R.id.lbl_titulo);
 
         // ✅ RECIBIR EL NOMBRE DEL USUARIO
@@ -37,6 +38,14 @@ public class Bienvenido extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Bienvenido.this, AdministradorAccesos.class);
+                startActivity(intent);
+            }
+        });
+
+        btnUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Bienvenido.this, CrearcionUsuarios.class);
                 startActivity(intent);
             }
         });
