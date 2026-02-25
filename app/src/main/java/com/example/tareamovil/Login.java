@@ -4,31 +4,81 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.tareamovil.clases.ApiService;
 import com.example.tareamovil.clases.Config;
 import com.example.tareamovil.clases.Dialog;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.sql.SQLData;
+
 public class Login extends AppCompatActivity {
     Button btningresar, btncrear;
-    TextView txtUser, txtClave;
+    TextView txtUser, txtClave, lblConexion;
+
     //@SuppressLint("MissingInflatedId")
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        lblConexion = findViewById(R.id.lblConexion);
+
         txtUser = findViewById(R.id.txtUsuario);
         txtClave = findViewById(R.id.txtClave);
         btningresar = findViewById(R.id.btnIngresar);
         btncrear = findViewById(R.id.btnCrearCuenta);
         btningresar.setOnClickListener(View -> validarCampos());
         btncrear.setOnClickListener(View -> llamarCrearUser());
+
+        verificarConexionBD();
+    }
+
+    private void verificarConexionBD() {
+        String url = Config.local + "estado.php";
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        String estado = json.getString("status");
+                        String mensaje = json.getString("message");
+
+                        lblConexion.setText(mensaje);
+
+                        if (estado.equals("online")) {
+                            lblConexion.setTextColor(Color.BLACK);
+                        } else {
+                            lblConexion.setTextColor(Color.RED);
+                        }
+
+                    } catch (JSONException e) {
+                        lblConexion.setText("Error al leer respuesta");
+                        lblConexion.setTextColor(Color.RED);
+                    }
+                },
+                error -> {
+                    lblConexion.setText("Sin conexion al servidor");
+                    lblConexion.setTextColor(Color.RED);
+                }
+        );
+
+        queue.add(request);
     }
 
     public void validarCampos()
