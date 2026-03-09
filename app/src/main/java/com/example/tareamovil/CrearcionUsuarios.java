@@ -73,6 +73,10 @@ public class CrearcionUsuarios extends AppCompatActivity {
         listViewUsuarios = findViewById(R.id.listViewUsuarios);
         cargarUsuarios();
 
+        int userId = getIntent().getIntExtra("User_ID", 0);
+        Login.registrarBitacora(userId, "Ingreso a Módulo de Usuarios", "1", this);
+
+
     }
 
     public void cargarUsuarios(){

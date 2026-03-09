@@ -1,94 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
 
+    <!-- Título -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="52dp"
-        android:backgroundTint="#F44336"
+        android:layout_marginTop="64dp"
         android:text="Autenticacion de Usuario"
         android:textColor="#E4582B"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Logo -->
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="214dp"
-        android:layout_height="110dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtUsuario"
+        android:layout_width="218dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/icono_app" />
 
+    <!-- Usuario -->
     <EditText
         android:id="@+id/txtUsuario"
-        android:layout_width="226dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Usuario"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtClave"
-        app:layout_constraintEnd_toEndOf="@+id/btnCrearCuenta"
-        app:layout_constraintStart_toStartOf="@+id/txtClave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
+    <!-- Contraseña -->
     <EditText
         android:id="@+id/txtClave"
-        android:layout_width="226dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="29dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btnIngresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtUsuario" />
 
-    <Button
-        android:id="@+id/btnIngresar"
-        android:layout_width="223dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#4547B3"
-        android:text="Ingresar"
-        app:layout_constraintBottom_toTopOf="@+id/btnCrearCuenta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- CheckBox Recordarme -->
+    <CheckBox
+        android:id="@+id/chRecordarme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Recordarme"
+        app:layout_constraintEnd_toEndOf="@+id/txtClave"
+        app:layout_constraintStart_toStartOf="@+id/txtClave"
         app:layout_constraintTop_toBottomOf="@+id/txtClave" />
 
+    <!-- Botón Ingresar -->
+    <Button
+        android:id="@+id/btnIngresar"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#4547B3"
+        android:text="Ingresar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chRecordarme" />
+
+    <!-- Botón Crear Cuenta -->
     <Button
         android:id="@+id/btnCrearCuenta"
-        android:layout_width="222dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="122dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#35A0C1"
         android:text="Crear Cuenta"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
 
+    <!-- Estado conexión -->
     <TextView
         android:id="@+id/lblConexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="46dp"
+        android:layout_marginBottom="32dp"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

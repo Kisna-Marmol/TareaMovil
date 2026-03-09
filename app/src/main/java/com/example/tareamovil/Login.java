@@ -3,12 +3,14 @@ package com.example.tareamovil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -16,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tareamovil.clases.ApiService;
+import com.example.tareamovil.clases.Bitacora;
 import com.example.tareamovil.clases.Config;
 import com.example.tareamovil.clases.Dialog;
 
@@ -28,6 +31,14 @@ public class Login extends AppCompatActivity {
     Button btningresar, btncrear;
     TextView txtUser, txtClave, lblConexion;
 
+    CheckBox chRecordarme;
+
+    // Claves para SharedPreferences
+    private static final String PREFS_NOMBRE   = "LoginPrefs";
+    private static final String CLAVE_RECORDAR = "recordarme";
+    private static final String CLAVE_USUARIO  = "usuario";
+
+    private static final String CLAVE_CLAVE    = "clave";
     //@SuppressLint("MissingInflatedId")
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,14 +50,64 @@ public class Login extends AppCompatActivity {
 
         txtUser = findViewById(R.id.txtUsuario);
         txtClave = findViewById(R.id.txtClave);
+        chRecordarme = findViewById(R.id.chRecordarme);
         btningresar = findViewById(R.id.btnIngresar);
         btncrear = findViewById(R.id.btnCrearCuenta);
         btningresar.setOnClickListener(View -> validarCampos());
         btncrear.setOnClickListener(View -> llamarCrearUser());
 
+        cargarUsuarioGuardado();
         verificarConexionBD();
+
     }
 
+    public static void registrarBitacora(int userId, String desc, String modulo, Context ctx) {
+        new Bitacora(userId, desc, ctx, modulo).insert(new ApiService.ApiCallback() {
+            @Override
+            public void onSuccess(String r) { Log.d("BITACORA", "OK: " + modulo); }
+            @Override
+            public void onError(String e)   { Log.e("BITACORA", "ERR: " + e); }
+        });
+    }
+
+    //Empiezar codigo recordarme
+    private void cargarUsuarioGuardado(){
+        SharedPreferences prefs = getSharedPreferences(PREFS_NOMBRE, Context.MODE_PRIVATE);
+        boolean recordar = prefs.getBoolean(CLAVE_RECORDAR, false);
+
+        Log.d("RECORDARME", "Recordar: " + recordar +
+                " | Usuario: " + prefs.getString(CLAVE_USUARIO, "vacío"));
+
+        if (recordar) {
+            String usuarioGuardado = prefs.getString(CLAVE_USUARIO, "");
+            String claveGuardada   = prefs.getString(CLAVE_CLAVE, "");
+            txtUser.setText(usuarioGuardado);
+            txtClave.setText(claveGuardada);
+            chRecordarme.setChecked(true);
+        }
+    }
+
+    private void guardarUsuario(String usuario, String clave) {
+        SharedPreferences.Editor editor =
+                getSharedPreferences(PREFS_NOMBRE, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(CLAVE_RECORDAR, true);
+        editor.putString(CLAVE_USUARIO, usuario);
+        editor.putString(CLAVE_CLAVE, clave);
+        editor.apply();
+
+        // ← Agrega esto para verificar en Logcat
+        Log.d("RECORDARME", "Usuario guardado: " + usuario);
+    }
+
+    private void borrarUsuarioGuardado() {
+        SharedPreferences.Editor editor =
+                getSharedPreferences(PREFS_NOMBRE, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(CLAVE_RECORDAR, false);
+        editor.remove(CLAVE_USUARIO);
+        editor.remove(CLAVE_CLAVE);
+        editor.apply();
+    }
+    //Fin codigo recordarme
     private void verificarConexionBD() {
         String url = Config.local + "estado.php";
 
@@ -99,11 +160,14 @@ public class Login extends AppCompatActivity {
         {
             String usuario=txtUser.getText().toString();
             String clave=txtClave.getText().toString();
-            confirmarCredenciales(usuario,clave);
+
+            // ← Guardar el estado ANTES de llamar la API
+            boolean recordar = chRecordarme.isChecked(); // ← Capturar aquí
+            confirmarCredenciales(usuario, clave, recordar); // ← Pasar el valor
             //Dialog.msgbox(MainActivity.this,"Informacion","Entramos Bien",R.drawable.ok);
         }
     }
-    private void confirmarCredenciales(String usuario, String clave)
+    private void confirmarCredenciales(String usuario, String clave, boolean recordar)
     {
         ApiService.login(usuario, clave, new ApiService.LoginCallback() {
             @Override
@@ -114,14 +178,32 @@ public class Login extends AppCompatActivity {
                     if(success)
                     {
                         String username = userdata.getJSONObject("data").getString("user_nombre");
+                        int userId = Integer.parseInt(userdata.getJSONObject("data").getString("user_id"));
                         //txtestado.setText("✅ Bienvenido, " + username + "!");
                         //Dialog.msgbox(MainActivity.this,"Exito","Bienvenido "+username,R.drawable.ok);
                         Config.usuario=usuario;
+
+                        Log.d("RECORDARME", "Checkbox marcado: " + recordar);
+
+                        if (recordar) {
+                            guardarUsuario(usuario, clave);
+                        } else {
+                            borrarUsuarioGuardado();
+                        }
                         //navegarPral();
                         Log.e("LOGIN EXITOSO",usuario);
                         Dialog.toast(Login.this,"Exito");
+                        //TEMPORAL
+                        Log.e("LOGIN_USERID", "Enviando userId: " + userId);
                         //PASAR EL NOMBRE DE USUARIO A LA PANTALLA DE BIENVENIDA
-                        llamarPral(username);
+
+                        Log.d("RECORDARME", "Checkbox marcado: " + chRecordarme.isChecked());
+
+                        // ← AGREGADO — registrar ingreso al sistema
+                        registrarBitacora(userId, "Ingreso al Sistema", "0", Login.this);
+                        // ── FIN AGREGADO
+
+                        llamarPral(username, userId);
                     }
                     else
                     {
@@ -149,10 +231,11 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    private void llamarPral(String nombreUsuario)
+    private void llamarPral(String nombreUsuario, int userId)
     {
         Intent intent = new Intent(Login.this, Bienvenido.class);
         intent.putExtra("Nombre_Usuario", nombreUsuario);
+        intent.putExtra("User_ID", userId);
         startActivity(intent);
         finish(); // Elimina el splash del stack para que no se regrese a él
     }
