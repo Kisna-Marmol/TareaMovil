@@ -2,11 +2,13 @@ package com.example.tareamovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,16 +16,20 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tareamovil.clases.Config;
+import com.example.tareamovil.clases.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Bienvenido extends AppCompatActivity {
-    Button btnsalir, btnAccesos, btnUsuario, btnBitacora;
+    Button btnsalir, btnAccesos, btnUsuario, btnBitacora, btnCliene;
     TextView tblTitulo;
 
+    ImageView imagen;
+
     int userId;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +38,9 @@ public class Bienvenido extends AppCompatActivity {
         btnAccesos = findViewById(R.id.btnModuloAcceso);
         btnUsuario = findViewById(R.id.btnModuloUsuario);
         btnBitacora = findViewById(R.id.btnModuloBitacora);
+        btnCliene = findViewById(R.id.btnModuloCliente);
         tblTitulo = findViewById(R.id.lbl_titulo);
+        imagen = findViewById(R.id.imgFotoPerfil);
 
         //ocultar();
 
@@ -93,7 +101,26 @@ public class Bienvenido extends AppCompatActivity {
             }
         });
 
+        btnCliene.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Bienvenido.this, ClienteActivity.class);
+                intent.putExtra("User_ID", userId);
+                startActivity(intent);
+            }
+        });
 
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pral=new Intent(Bienvenido.this,FotoActivity.class);
+                //pral.putExtra("id",Utils.iduser);
+                pral.putExtra("tabla","tbl_user_img");
+                pral.putExtra("campof","user_img");
+                pral.putExtra("campoi","user_id");
+                Bienvenido.this.startActivity(pral);
+            }
+        });
     }
 
     /*public void ocultar(){

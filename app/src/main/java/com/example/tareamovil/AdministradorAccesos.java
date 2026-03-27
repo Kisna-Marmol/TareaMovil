@@ -30,10 +30,12 @@ public class AdministradorAccesos extends AppCompatActivity {
     private Spinner spUsuarios;
     private Switch swReiniciarSesion, swRestringirIntentos, swModuloUsuario,
             swCrearUsuario, swModificarUsuario, swActivarUsuario,
-            swDesactivarUsuario, swModuloProducto, swCrearProducto, swModificarProducto;
+            swDesactivarUsuario, swModuloProducto, swCrearProducto, swModificarProducto,
+            swCliente;
     private LinearLayout filaReiniciar, filaRestringir, filaModuloUsuario,
             filaCrearUsuario, filaModificarUsuario, filaActivarUsuario,
-            filaDesactivarUsuario, filaModuloProducto, filaCrearProducto, filaModificarProducto;
+            filaDesactivarUsuario, filaModuloProducto, filaCrearProducto, filaModificarProducto,
+            filaCliente;
 
     // Listas para el spinner
     private List<String> nombresUsuarios = new ArrayList<>();
@@ -58,6 +60,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         swModuloProducto     = findViewById(R.id.swModuloProducto);
         swCrearProducto      = findViewById(R.id.swCrearProducto);
         swModificarProducto  = findViewById(R.id.swModificarProducto);
+        swCliente = findViewById(R.id.swCliente);
 
         // Enlazar filas
         filaReiniciar        = findViewById(R.id.filaReiniciarSesion);
@@ -70,6 +73,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         filaModuloProducto   = findViewById(R.id.filaModuloProducto);
         filaCrearProducto    = findViewById(R.id.filaCrearProducto);
         filaModificarProducto= findViewById(R.id.filaModificarProducto);
+        filaCliente = findViewById(R.id.filaCliente);
 
         // Configurar switches con color
         configurarSwitch(swReiniciarSesion,    filaReiniciar,    "0");
@@ -82,6 +86,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         configurarSwitch(swModuloProducto,     filaModuloProducto,  "2");
         configurarSwitch(swCrearProducto,      filaCrearProducto,   "2.1");
         configurarSwitch(swModificarProducto,  filaModificarProducto,"2.2");
+        configurarSwitch(swCliente,  filaCliente,"2.3");
 
         // Cargar usuarios en spinner
         cargarUsuarios();
@@ -197,6 +202,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         swModuloProducto.setChecked(false);
         swCrearProducto.setChecked(false);
         swModificarProducto.setChecked(false);
+        swCliente.setChecked(false);
     }
 
     private void activarSwitch(String codigo) {
@@ -211,6 +217,7 @@ public class AdministradorAccesos extends AppCompatActivity {
             case "2":   swModuloProducto.setChecked(true);     break;
             case "2.1": swCrearProducto.setChecked(true);      break;
             case "2.2": swModificarProducto.setChecked(true);  break;
+            case "2.3": swCliente.setChecked(true); break;
         }
     }
 
@@ -229,6 +236,7 @@ public class AdministradorAccesos extends AppCompatActivity {
             accesos.put(crearAcceso("2",   swModuloProducto.isChecked()));
             accesos.put(crearAcceso("2.1", swCrearProducto.isChecked()));
             accesos.put(crearAcceso("2.2", swModificarProducto.isChecked()));
+            accesos.put(crearAcceso("2.3", swCliente.isChecked()));
 
             JSONObject params = new JSONObject();
             params.put("user_id", userIdSeleccionado);

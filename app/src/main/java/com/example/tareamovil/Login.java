@@ -182,6 +182,7 @@ public class Login extends AppCompatActivity {
                         //txtestado.setText("✅ Bienvenido, " + username + "!");
                         //Dialog.msgbox(MainActivity.this,"Exito","Bienvenido "+username,R.drawable.ok);
                         Config.usuario=usuario;
+                        Config.iduser = userId;
 
                         Log.d("RECORDARME", "Checkbox marcado: " + recordar);
 

@@ -9,4 +9,5 @@ public class Config {
 
     public static String local="http://kisna.bonaquian.com/movil1/";//UTH CLASE
     public static String usuario="";
+    public static int iduser = 0;
 }

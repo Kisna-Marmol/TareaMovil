@@ -38,8 +38,9 @@ public class Dialog
     {
         Toast.makeText(context,mens,Toast.LENGTH_LONG).show();
     }
-}
-interface ConfirmationDialogCallback {
-    void onConfirm();      // User clicked "Sí"
-    void onCancel();       // User clicked "No"
+
+    public interface ConfirmationDialogCallback {
+        void onConfirm();
+        void onCancel();
+    }
 }
