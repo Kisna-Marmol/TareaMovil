@@ -23,7 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Bienvenido extends AppCompatActivity {
-    Button btnsalir, btnAccesos, btnUsuario, btnBitacora, btnCliene;
+    Button btnsalir, btnAccesos, btnUsuario, btnBitacora, btnCliene, btnGps;
     TextView tblTitulo;
 
     ImageView imagen;
@@ -39,6 +39,7 @@ public class Bienvenido extends AppCompatActivity {
         btnUsuario = findViewById(R.id.btnModuloUsuario);
         btnBitacora = findViewById(R.id.btnModuloBitacora);
         btnCliene = findViewById(R.id.btnModuloCliente);
+        btnGps = findViewById(R.id.btnModuloGps);
         tblTitulo = findViewById(R.id.lbl_titulo);
         imagen = findViewById(R.id.imgFotoPerfil);
 
@@ -49,6 +50,7 @@ public class Bienvenido extends AppCompatActivity {
         findViewById(R.id.btnModuloProducto).setVisibility(View.GONE);
         findViewById(R.id.btnModuloPedido).setVisibility(View.GONE);
         findViewById(R.id.btnModuloBitacora).setVisibility(View.GONE);
+        findViewById(R.id.btnModuloGps).setVisibility(View.GONE);
         findViewById(R.id.btnReiniciarSesion).setVisibility(View.GONE);
 
         // ✅ RECIBIR EL NOMBRE DEL USUARIO
@@ -104,7 +106,16 @@ public class Bienvenido extends AppCompatActivity {
         btnCliene.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Bienvenido.this, ClienteActivity.class);
+                Intent intent = new Intent(Bienvenido.this, UbicacionActivity.class);
+                intent.putExtra("User_ID", userId);
+                startActivity(intent);
+            }
+        });
+
+        btnGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Bienvenido.this, UbicacionActivity.class);
                 intent.putExtra("User_ID", userId);
                 startActivity(intent);
             }
@@ -157,6 +168,7 @@ public class Bienvenido extends AppCompatActivity {
                                     case "3":  btnAccesos.setVisibility(View.VISIBLE); break;
                                     case "4":  findViewById(R.id.btnModuloPedido).setVisibility(View.VISIBLE); break;
                                     case "5":  findViewById(R.id.btnModuloBitacora).setVisibility(View.VISIBLE); break;
+                                    case "6": findViewById(R.id.btnModuloGps).setVisibility(View.VISIBLE); break;
                                 }
                             }
                         }

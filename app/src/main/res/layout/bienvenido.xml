@@ -146,7 +146,17 @@
           android:textColor="#000000"
           android:textStyle="bold" />
 
-
+      <Button
+          android:id="@+id/btnModuloGps"
+          android:layout_width="match_parent"
+          android:layout_height="60dp"
+          android:layout_marginBottom="8dp"
+          android:backgroundTint="#00C853"
+          android:drawableEnd="@drawable/ic_menu"
+          android:gravity="center"
+          android:text="MODULO GPS"
+          android:textColor="#000000"
+          android:textStyle="bold" />
     </LinearLayout>
   </ScrollView>
 

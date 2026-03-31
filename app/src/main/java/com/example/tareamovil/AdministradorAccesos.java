@@ -2,6 +2,7 @@ package com.example.tareamovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,17 +32,18 @@ public class AdministradorAccesos extends AppCompatActivity {
     private Switch swReiniciarSesion, swRestringirIntentos, swModuloUsuario,
             swCrearUsuario, swModificarUsuario, swActivarUsuario,
             swDesactivarUsuario, swModuloProducto, swCrearProducto, swModificarProducto,
-            swCliente;
+            swCliente, swGps;
     private LinearLayout filaReiniciar, filaRestringir, filaModuloUsuario,
             filaCrearUsuario, filaModificarUsuario, filaActivarUsuario,
             filaDesactivarUsuario, filaModuloProducto, filaCrearProducto, filaModificarProducto,
-            filaCliente;
+            filaCliente, filaGps;
 
     // Listas para el spinner
     private List<String> nombresUsuarios = new ArrayList<>();
     private List<Integer> idsUsuarios = new ArrayList<>();
     private int userIdSeleccionado = -1;
     private boolean cargandoAccesos = false; // evita guardar mientras se cargan
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         swCrearProducto      = findViewById(R.id.swCrearProducto);
         swModificarProducto  = findViewById(R.id.swModificarProducto);
         swCliente = findViewById(R.id.swCliente);
+        swGps = findViewById(R.id.swGps);
 
         // Enlazar filas
         filaReiniciar        = findViewById(R.id.filaReiniciarSesion);
@@ -74,6 +77,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         filaCrearProducto    = findViewById(R.id.filaCrearProducto);
         filaModificarProducto= findViewById(R.id.filaModificarProducto);
         filaCliente = findViewById(R.id.filaCliente);
+        filaGps = findViewById(R.id.filaGps);
 
         // Configurar switches con color
         configurarSwitch(swReiniciarSesion,    filaReiniciar,    "0");
@@ -87,6 +91,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         configurarSwitch(swCrearProducto,      filaCrearProducto,   "2.1");
         configurarSwitch(swModificarProducto,  filaModificarProducto,"2.2");
         configurarSwitch(swCliente,  filaCliente,"2.3");
+        configurarSwitch(swGps, filaGps, "2.4");
 
         // Cargar usuarios en spinner
         cargarUsuarios();
@@ -203,6 +208,7 @@ public class AdministradorAccesos extends AppCompatActivity {
         swCrearProducto.setChecked(false);
         swModificarProducto.setChecked(false);
         swCliente.setChecked(false);
+        swGps.setChecked(false);
     }
 
     private void activarSwitch(String codigo) {
@@ -218,6 +224,7 @@ public class AdministradorAccesos extends AppCompatActivity {
             case "2.1": swCrearProducto.setChecked(true);      break;
             case "2.2": swModificarProducto.setChecked(true);  break;
             case "2.3": swCliente.setChecked(true); break;
+            case "2.4": swGps.setChecked(true); break;
         }
     }
 
@@ -237,6 +244,7 @@ public class AdministradorAccesos extends AppCompatActivity {
             accesos.put(crearAcceso("2.1", swCrearProducto.isChecked()));
             accesos.put(crearAcceso("2.2", swModificarProducto.isChecked()));
             accesos.put(crearAcceso("2.3", swCliente.isChecked()));
+            accesos.put(crearAcceso("2.4", swGps.isChecked()));
 
             JSONObject params = new JSONObject();
             params.put("user_id", userIdSeleccionado);
